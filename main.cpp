@@ -1,29 +1,40 @@
 #include <iostream>
 #include <Windows.h>
 
+#include <cmath>
+
 #include "application/application.h"
 #include "gpu/gpu.h"
 
 #pragma comment(linker, "/subsystem:console /entry:wWinMainCRTStartup" )//更改main入口
 
+void draw_circle(int cx, int cy, int radius)
+{
+	const int steps = 360; // 越大越圆
+
+	for (int i = 0; i < steps; i++)
+	{
+		float theta = 2.0f * PI * i / steps;
+
+		int x = static_cast<int>(cx + radius * std::cos(theta));
+		int y = static_cast<int>(cy + radius * std::sin(theta));
+
+		sgl->draw_point(x, y, Color::Blue);
+	}
+}
+
 void on_render()
 {
 	sgl->clear();
 
-	//for (uint32_t i = 0; i < App->get_width(); ++i)
-	//{
-	//	sgl->draw_point(i, 100, RGBA(i, i, i));
-	//}
+	for (uint32_t i = 0; i < App->get_width(); ++i)
+	{
+		sgl->draw_point(i,100,Color::Red);
+	}
 
-	sgl->clear();
-	sgl->draw_point(100, 100, RGBA(255, 255, 255));
-	App->show();
-
-	sgl->draw_point(200, 200, RGBA(255, 255, 255));
-	sgl->draw_point(201, 200, RGBA(255, 255, 255));
-	sgl->draw_point(200, 201, RGBA(255, 255, 255));
-	sgl->draw_point(201, 201, RGBA(255, 255, 255));
+	draw_circle(250, 250, 50);
 }
+
 
 int APIENTRY wWinMain(
 	_In_ HINSTANCE hInstance, //本应用程序实例句柄，唯一指代当前程序

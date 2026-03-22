@@ -11,6 +11,6 @@ add_subdirectory(application)
 add_subdirectory(gpu)
 
 #本工程所有cpp文件编译链接，生成exe
-add_executable(SoftRenderer "main.cpp" "GPU/gpu.h" "GPU/gpu.cpp" "GPU/frame_buffer.h" "GPU/frame_buffer.cpp")
+add_executable(SoftRenderer "main.cpp")
 
 target_link_libraries(SoftRenderer applicationLib gpuLib)
